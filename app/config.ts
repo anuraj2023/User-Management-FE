@@ -1,5 +1,5 @@
 const config = {
-    apiBaseUrl: 'https://user-management-backend-production.up.railway.app/api/users',
+    apiBaseUrl: 'https://user-management-be-lgf8.onrender.com/api/users',
   };
   
   export default config;

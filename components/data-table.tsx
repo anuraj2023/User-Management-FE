@@ -63,45 +63,6 @@ const DataTable: React.FC<{ data: User[] }> = ({ data }) => {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
-  
-  const sendEmail = async (emailData: User[]) => {
-    let result = false;
-    const res = await fetch(`${config.apiBaseUrl}/mail/sendMail`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        emailData,
-      }),
-    });
-    if (res.ok) {
-      result = true;
-      
-    }
-
-    return result;
-  };
-
-  const handleSendEmail = async () => {
-   
-    const selectedRows = table.getFilteredSelectedRowModel().rows;
-    const emailData: User[] = selectedRows.map((obj) => obj.original);
-    console.log("emailData", emailData);
-    if(emailData.length==0){
-      setIsAlertOpen(true)
-      setAlertMessage("Please select one or more row")
-    }else{
-      const result = await sendEmail(emailData);
-    setIsAlertOpen(true);
-    if (result) {
-      setAlertMessage("Email sent successfully");
-    } else {
-      setAlertMessage("Could not send email");
-    }
-    }
-    
-  };
 
   const deleteUser = async (id: number) => {
     let result = false;
@@ -383,7 +344,6 @@ const DataTable: React.FC<{ data: User[] }> = ({ data }) => {
         <Button className="mr-4" onClick={handleAddUser}>
           Add User
         </Button>
-        <Button onClick={handleSendEmail}>Send Email</Button>
       </div>
 
       <div>
